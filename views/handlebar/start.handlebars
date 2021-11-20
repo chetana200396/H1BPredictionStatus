@@ -1,0 +1,33 @@
+<h1>{{title}}</h1>
+<p>This website will help you to get information about H1B visa Approval.</p>
+<form method="POST" action="/visaApproval">
+<ul>
+    <label>Employer Name : 
+        <input type="text" name="employerName" placeholder="Search term">
+    </label><br>
+     <label>SOC COde :
+        <input type="text" name="socCode" placeholder="Search term">
+    </label><br>
+     <label>Profile Offered
+        <input type="text" name="profileOffered" placeholder="Search term">
+    </label><br>
+     <label>Work Site :
+        <input type="text" name="workSite" placeholder="Search term">
+    </label><br>
+     <label>Year :
+        <input type="text" name="year" placeholder="Search term">
+    </label><br>
+    <label> Duration Work : 
+    <br>
+    <input type="radio" id="fullTime" name="fullTime" value="30">
+    <label for="fullTime">Full Time</label><br>
+    <input type="radio" id="partTime" name="partTime" value="30">
+    <label for="partTime">Part Time</label>
+    </label><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+{{#if hasErrors}}
+  <p class="not-found">{{errors}}</p>
+{{/if}}
