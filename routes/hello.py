@@ -1,34 +1,44 @@
-import sys 
-import json
+# import sys 
+# import json
 
-employerName=sys.argv[1]
-print(employerName)
+# employerName=sys.argv[1]
+# print(employerName)
 
 
-socCode=sys.argv[2]
-print(socCode)
+# # socCode=sys.argv[2]
+# # print(socCode)
 
-profileOffered=sys.argv[3]
-print(profileOffered)
+# # profileOffered=sys.argv[3]
+# # print(profileOffered)
 
-workSite=sys.argv[4]
-print(workSite)
+# # workSite=sys.argv[4]
+# # print(workSite)
 
-year=sys.argv[5]
-print(year)
+# # year=sys.argv[5]
+# # print(year)
 
-fullTime=sys.argv[6]
-print(fullTime)
+# # fullTime=sys.argv[6]
+# # print(fullTime)
 
-partTime=sys.argv[7]
-print(partTime)
+# partTime=sys.argv[7]
+# print(partTime)
 
-resp = {
-    "response" : 200,
-    "Message" : " Got Output"
-}
 
-json.dump(resp)
-print(json.dump(resp)
-)
+# newdata = {'sum':1}
+# print(json.dumps(newdata))
 
+import sys, json
+ 
+data = json.loads(sys.argv[1])
+array = data['array']
+
+employerName = array[0];
+socCode = array[1];
+profileOffered = array[2];
+workSite = array[3];
+workSite = array[4];
+fullTime = array[5];
+partTime = array[6];
+
+newdata = {'sum': employerName+socCode+profileOffered+workSite+workSite+fullTime+partTime}
+print(json.dumps(newdata))

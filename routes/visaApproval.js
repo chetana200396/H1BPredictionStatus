@@ -1,9 +1,12 @@
+const spawn = require('child_process').spawn;
+
 const express = require('express');
 const router = express.Router();
 let p = require('python-shell');
 
-
-router.post('/', async (req, res) => {
+    router.post('/', async (req, res) => {
+      const spawn = require('child_process').spawn;
+      
   const reqBody = req.body;
   let employerName = reqBody.employerName;
   let socCode = reqBody.socCode;
@@ -14,23 +17,29 @@ router.post('/', async (req, res) => {
   let partTime = reqBody.partTime;
 
 
-    var options = {
-      args: [employerName,socCode,profileOffered,workSite,year,fullTime,partTime]
+  const data = {
+      array: [employerName,socCode,profileOffered,workSite,year,fullTime,partTime]
       }
-
-      try{    
-  
-        var test = new p.PythonShell('/Users/chetanahanmantnirmal/Documents/Workspaces/H1BPredictionStatus/routes/hello.py',options)
-        test.on('message', function  (message)  {
-           console.log(message);
-        });
-    
-      }catch(e){
-        console.log(e);
-      }
-
-  
+      
+    let stringifiedData = JSON.stringify(data);
+      
+    const py = spawn('python', ['/Users/chetanahanmantnirmal/Documents/Workspaces/H1BPredictionStatus/routes/hello.py', stringifiedData]);
+      
+    resultString = '';
+        
+    py.stdout.on('data', function (stdData) {
+      resultString += stdData.toString();
+    });
+      
+    py.stdout.on('end', function () {
+      let resultData = JSON.parse(resultString);      
+      let sum = resultData['sum'];
+      console.log(sum);
+      console.log('Sum of array from Python process =', sum);
     });
 
+  console.log("Finished");
+  });
 
-module.exports = router;
+
+ module.exports = router;
