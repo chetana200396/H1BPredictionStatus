@@ -37,8 +37,8 @@ socCode = array[1];
 profileOffered = array[2];
 workSite = array[3];
 workSite = array[4];
-fullTime = array[5];
-partTime = array[6];
+durationWork = array[5];
 
-newdata = {'sum': employerName+socCode+profileOffered+workSite+workSite+fullTime+partTime}
+
+newdata = {'sum': employerName+socCode+profileOffered+workSite+workSite+durationWork}
 print(json.dumps(newdata))

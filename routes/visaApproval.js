@@ -13,12 +13,12 @@ let p = require('python-shell');
   let profileOffered = reqBody.profileOffered;
   let workSite = reqBody.workSite;
   let year = reqBody.year;
-  let fullTime = reqBody.fullTime;
-  let partTime = reqBody.partTime;
+  let durationWork = reqBody.durationWork;
+
 
 
   const data = {
-      array: [employerName,socCode,profileOffered,workSite,year,fullTime,partTime]
+      array: [employerName,socCode,profileOffered,workSite,year,durationWork]
       }
       
     let stringifiedData = JSON.stringify(data);
