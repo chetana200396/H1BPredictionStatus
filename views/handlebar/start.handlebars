@@ -1,3 +1,4 @@
+<div class="container">
 <h1>{{title}}</h1>
 <p>This website will help you to get information about H1B visa Approval.</p>
 <form method="POST" action="/visaApproval">
@@ -17,17 +18,16 @@
      <label>Year :
         <input type="text" name="year" placeholder="Search term">
     </label><br>
-    <label> Duration Work : 
-    <br>
-    <input type="radio" id="fullTime" name="fullTime" value="30">
-    <label for="fullTime">Full Time</label><br>
-    <input type="radio" id="partTime" name="partTime" value="30">
-    <label for="partTime">Part Time</label>
+    <label>Duration Work :
+    <select id="durationWork" name="durationWork">
+      <option value="fullTime">Full Time</option>
+      <option value="partTime">Part Time</option>
+    </select>
     </label><br>
-
     <button type="submit">Submit</button>
 </form>
 
 {{#if hasErrors}}
   <p class="not-found">{{errors}}</p>
 {{/if}}
+</div>
