@@ -1,11 +1,12 @@
-const spawn = require('child_process').spawn;
+  const spawn = require('child_process').spawn;
 
-const express = require('express');
-const router = express.Router();
-let p = require('python-shell');
+  const express = require('express');
+  const router = express.Router();
+  let p = require('python-shell');
 
   router.post('/', async (req, res) => {
   const spawn = require('child_process').spawn;
+
   let isSum = false;
   
   const reqBody = req.body;
@@ -16,8 +17,11 @@ let p = require('python-shell');
   let year = reqBody.year;
   let durationWork = reqBody.durationWork;
 
-try{
-  const data = {
+
+  //Error handling is required
+
+  try{
+    const data = {
       array: [employerName,socCode,profileOffered,workSite,year,durationWork]
     }
       
@@ -25,7 +29,6 @@ try{
       
     const py = spawn('python', ['/Users/chetanahanmantnirmal/Documents/Workspaces/H1BPredictionStatus/routes/hello.py', stringifiedData]);
       
-    console.log("summmmmm is :" +JSON.stringify(py));
     resultString = '';
         
     py.stdout.on('data', function (stdData) {
@@ -35,17 +38,14 @@ try{
     py.stdout.on('end', function () {
       let resultData = JSON.parse(resultString);      
       let sum = resultData['sum'];
-      console.log(sum);
       res.render('handlebar/start', { sum : sum , isSum : true});
       return;
     });
-    
 
-} catch (e) {
-  res.status(404);
-  res.render('handlebar/start', { errors : e.message , hasErrors : true});
-}
-
+    } catch (e) {
+      res.status(404);
+      res.render('handlebar/start', { errors : e.message , hasErrors : true});
+    }
   });
 
 
