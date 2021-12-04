@@ -10,24 +10,44 @@
   let isSum = false;
   
   const reqBody = req.body;
-  let employerName = reqBody.employerName;
-  let socCode = reqBody.socCode;
-  let profileOffered = reqBody.profileOffered;
-  let workSite = reqBody.workSite;
-  let year = reqBody.year;
-  let durationWork = reqBody.durationWork;
 
+  let EMPLOYER_NAME = reqBody.EMPLOYER_NAME;
+  let EMPLOYER_START_DATE = reqBody.EMPLOYER_START_DATE;
+  let EMPLOYER_END_DATE = reqBody.EMPLOYER_END_DATE;
+  let EMPLOYER_STATE = reqBody.EMPLOYER_STATE;
+  let AGENT_REPRESENTING_EMPLOYER = reqBody.AGENT_REPRESENTING_EMPLOYER;
+  let SOC_CODE = reqBody.SOC_CODE;
+  let NAICS_CODE = reqBody.NAICS_CODE;
+  let FULL_TIME_POSITION = reqBody.FULL_TIME_POSITION;
+  let H1B_DEPENDENT = reqBody.H1B_DEPENDENT;
+  let WORKSITE_STATE = reqBody.WORKSITE_STATE;
 
-  //Error handling is required
+  let error = checkArgumentProvided(EMPLOYER_NAME, EMPLOYER_START_DATE, EMPLOYER_END_DATE, EMPLOYER_STATE, AGENT_REPRESENTING_EMPLOYER
+    , SOC_CODE, NAICS_CODE, FULL_TIME_POSITION, H1B_DEPENDENT, WORKSITE_STATE);
+  if(error !== undefined){
+      throw error;
+  }
+
+  let error1 = checkArgumentIsString(EMPLOYER_NAME, SOC_CODE, NAICS_CODE);
+  if(error1 !== undefined){
+      throw error1;
+  }
+
+   let error2 = checkArgumentIsNullOrEmpty(EMPLOYER_NAME, SOC_CODE, NAICS_CODE);
+   if(error2 !== undefined){
+       throw error2;
+   } 
 
   try{
     const data = {
-      array: [employerName,socCode,profileOffered,workSite,year,durationWork]
+      array: [EMPLOYER_NAME,EMPLOYER_START_DATE,EMPLOYER_END_DATE,EMPLOYER_STATE,AGENT_REPRESENTING_EMPLOYER,SOC_CODE,NAICS_CODE,
+        FULL_TIME_POSITION,H1B_DEPENDENT,WORKSITE_STATE]
     }
       
     let stringifiedData = JSON.stringify(data);
-      
-    const py = spawn('python', ['/Users/chetanahanmantnirmal/Documents/Workspaces/H1BPredictionStatus/routes/hello.py', stringifiedData]);
+    console.log(stringifiedData);
+    
+    const py = spawn('python', ['/Users/chetanahanmantnirmal/Documents/Chetana/Semester 1/DATA MINING/Project/H1BPrediction/routes/data.py', stringifiedData]);
       
     resultString = '';
         
@@ -47,6 +67,65 @@
       res.render('handlebar/start', { errors : e.message , hasErrors : true});
     }
   });
+
+
+function checkArgumentProvided(EMPLOYER_NAME, EMPLOYER_START_DATE, EMPLOYER_END_DATE, EMPLOYER_STATE, AGENT_REPRESENTING_EMPLOYER
+  ,SOC_CODE, NAICS_CODE, FULL_TIME_POSITION, H1B_DEPENDENT, WORKSITE_STATE){
+  if(!EMPLOYER_NAME){
+      throw new Error("EMPLOYER_NAME parameter is not provided");
+  } 
+  if(!EMPLOYER_START_DATE){
+      throw new Error("EMPLOYER_START_DATE parameter is not provided");
+  }
+  if(!EMPLOYER_END_DATE){
+      throw new Error("EMPLOYER_END_DATE parameter is not provided");
+  }
+  if(!EMPLOYER_STATE){
+      throw new Error("EMPLOYER_STATE parameter is not provided");
+  }
+  if(!AGENT_REPRESENTING_EMPLOYER){
+    throw new Error("AGENT_REPRESENTING_EMPLOYER parameter is not provided");
+} 
+if(!SOC_CODE){
+    throw new Error("SOC_CODE parameter is not provided");
+}
+if(!NAICS_CODE){
+    throw new Error("NAICS_CODE parameter is not provided");
+}
+if(!FULL_TIME_POSITION){
+    throw new Error("FULL_TIME_POSITION parameter is not provided");
+}
+if(!H1B_DEPENDENT){
+  throw new Error("H1B_DEPENDENT parameter is not provided");
+} 
+if(!WORKSITE_STATE){
+  throw new Error("WORKSITE_STATE parameter is not provided");
+}
+}
+
+function checkArgumentIsString(EMPLOYER_NAME, SOC_CODE, NAICS_CODE){
+  if (!(typeof EMPLOYER_NAME == 'string')) {
+      throw new Error("EMPLOYER_NAME Parameter is not string type");
+  }
+  if (!(typeof SOC_CODE == 'string')) {
+      throw new Error("SOC_CODE Parameter is not string type");
+  }
+  if (!(typeof NAICS_CODE == 'string')) {
+      throw new Error("NAICS_CODE Parameter is not string type");
+  }
+}
+
+function checkArgumentIsNullOrEmpty(EMPLOYER_NAME, SOC_CODE, NAICS_CODE){
+  if (EMPLOYER_NAME == null || EMPLOYER_NAME.trim() === ''){
+      throw new Error("restaurant Id parameter is empty");
+  }
+  if (SOC_CODE == null || SOC_CODE.trim() === ''){
+      throw new Error("Title parameter is empty");
+  }
+  if (NAICS_CODE == null || NAICS_CODE.trim() === ''){
+      throw new Error("Reviewer parameter is empty");
+  }
+}
 
 
  module.exports = router;

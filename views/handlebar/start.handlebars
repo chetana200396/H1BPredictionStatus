@@ -4,26 +4,159 @@
 <form method="POST" action="/visaApproval">
 <ul>
     <label>Employer Name : 
-        <input type="text" name="employerName" placeholder="Search term">
-    </label><br>
-     <label>SOC COde :
-        <input type="text" name="socCode" placeholder="Search term">
-    </label><br>
-     <label>Profile Offered
-        <input type="text" name="profileOffered" placeholder="Search term">
-    </label><br>
-     <label>Work Site :
-        <input type="text" name="workSite" placeholder="Search term">
-    </label><br>
-     <label>Year :
-        <input type="text" name="year" placeholder="Search term">
-    </label><br>
-    <label>Duration Work :
-    <select id="durationWork" name="durationWork">
-      <option name ="fullTime" value="fullTime">Full Time</option>
-      <option name ="partTime" value="partTime">Part Time</option>
-    </select>
-    </label><br>
+        <input type="text" name="EMPLOYER_NAME" placeholder="Employer Name">
+    </label><br><br>
+    <label>Employer Start Date : 
+        <input type="date" name="EMPLOYER_START_DATE" placeholder="Employer Start Date">
+    </label><br><br>
+    <label>Employer End Date : 
+        <input type="date" name="EMPLOYER_END_DATE" placeholder="Employer End Date">
+    </label><br><br>
+    
+    <label for="EMPLOYER_STATE">Employer State : </label>
+    <select name="EMPLOYER_STATE" id="EMPLOYER_STATE">
+    <option value="AL">AL</option>
+    <option value="AK">AK</option>
+    <option value="AZ">AZ</option>
+    <option value="AR">AR</option>
+    <option value="CA">CA</option>
+    <option value="CO">CO</option>
+    <option value="CT">CT</option>
+    <option value="DE">DE</option>
+    <option value="DC">DC</option>
+    <option value="FL">FL</option>
+    <option value="GA">GA</option>
+    <option value="GU">GU</option>
+    <option value="HI">HI</option>
+    <option value="ID">ID</option>
+    <option value="IL">IL</option>
+    <option value="IN">IN</option>
+    <option value="IA">IA</option>
+    <option value="KS">KS</option>
+    <option value="KY">KY</option>
+    <option value="LA">LA</option>
+    <option value="MA">MA</option>
+    <option value="MD">MD</option>
+    <option value="ME">ME</option>
+    <option value="MI">MI</option>
+    <option value="MN">MN</option>
+    <option value="MO">MO</option>
+    <option value="MP">MP</option>
+    <option value="MS">MS</option>
+    <option value="MT">MT</option>
+    <option value="NC">NC</option>
+    <option value="ND">ND</option>
+    <option value="NE">NE</option>
+    <option value="NH">NH</option>
+    <option value="NJ">NJ</option>
+    <option value="NM">NM</option>
+    <option value="NV">NV</option>
+    <option value="NY">NY</option>
+    <option value="OH">OH</option>
+    <option value="OK">OK</option>
+    <option value="OR">OR</option>
+    <option value="PA">PA</option>
+    <option value="PR">PR</option>
+    <option value="RI">RI</option>
+    <option value="SC">SC</option>
+    <option value="SD">SD</option>
+    <option value="TN">TN</option>
+    <option value="TX">TX</option>
+    <option value="UT">UT</option>
+    <option value="VA">VA</option>
+    <option value="VI">VI</option>
+    <option value="VT">VT</option>
+    <option value="WA">WA</option>
+    <option value="WI">WI</option>
+    <option value="WV">WV</option>
+    <option value="WY">WY</option>
+    </select> <br><br>
+
+    <p>Agent Representing Employer :</p>
+    <input type="radio" id="yes" name="AGENT_REPRESENTING_EMPLOYER" value="Y">
+    <label for="yes">YES</label>
+    <input type="radio" id="no" name="AGENT_REPRESENTING_EMPLOYER" value="N">
+    <label for="no">NO</label><br><br>
+
+     <label>SOC Code :
+        <input type="text" name="SOC_CODE" placeholder="SOC Code">
+    </label><br><br>
+     <label>Nacis Code
+        <input type="text" name="NAICS_CODE" placeholder="Nacis Code">
+    </label><br><br>
+
+    <p>Full Time Position :</p>
+     <input type="radio" id="yes" name="FULL_TIME_POSITION" value="Y">
+     <label for="yes">YES</label>
+     <input type="radio" id="no" name="FULL_TIME_POSITION" value="N">
+     <label for="no">NO</label><br><br>
+
+    <p>H1B Dependent :</p>
+    <input type="radio" id="yes" name="H1B_DEPENDENT" value="Y">
+    <label for="yes">YES</label>
+    <input type="radio" id="no" name="H1B_DEPENDENT" value="N">
+    <label for="no">NO</label><br><br>
+    
+    <label for="WORKSITE_STATE">Worksite State : </label>
+    <select name="WORKSITE_STATE" id="WORKSITE_STATE">
+    <option value="AL">AL</option>
+    <option value="AK">AK</option>
+    <option value="AZ">AZ</option>
+    <option value="AR">AR</option>
+    <option value="CA">CA</option>
+    <option value="CO">CO</option>
+    <option value="CT">CT</option>
+    <option value="DE">DE</option>
+    <option value="DC">DC</option>
+    <option value="FL">FL</option>
+    <option value="GA">GA</option>
+    <option value="GU">GU</option>
+    <option value="HI">HI</option>
+    <option value="ID">ID</option>
+    <option value="IL">IL</option>
+    <option value="IN">IN</option>
+    <option value="IA">IA</option>
+    <option value="KS">KS</option>
+    <option value="KY">KY</option>
+    <option value="LA">LA</option>
+    <option value="MA">MA</option>
+    <option value="MD">MD</option>
+    <option value="ME">ME</option>
+    <option value="MI">MI</option>
+    <option value="MN">MN</option>
+    <option value="MO">MO</option>
+    <option value="MP">MP</option>
+    <option value="MS">MS</option>
+    <option value="MT">MT</option>
+    <option value="NC">NC</option>
+    <option value="ND">ND</option>
+    <option value="NE">NE</option>
+    <option value="NH">NH</option>
+    <option value="NJ">NJ</option>
+    <option VALUE="NH">NH</option>
+    <option value="NM">NM</option>
+    <option value="NV">NV</option>
+    <option value="NY">NY</option>
+    <option value="OH">OH</option>
+    <option value="OK">OK</option>
+    <option value="OR">OR</option>
+    <option value="PA">PA</option>
+    <option value="PR">PR</option>
+    <option value="RI">RI</option>
+    <option value="SC">SC</option>
+    <option value="SD">SD</option>
+    <option value="TN">TN</option>
+    <option value="TX">TX</option>
+    <option value="UT">UT</option>
+    <option value="VA">VA</option>
+    <option value="VI">VI</option>
+    <option value="VT">VT</option>
+    <option value="WA">WA</option>
+    <option value="WI">WI</option>
+    <option value="WV">WV</option>
+    <option value="WY">WY</option>
+    </select><br><br>
+
     <button type="submit">Submit</button>
 </form>
 
