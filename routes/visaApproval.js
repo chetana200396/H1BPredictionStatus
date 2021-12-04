@@ -8,7 +8,8 @@
   const spawn = require('child_process').spawn;
 
   let isSum = false;
-  
+  let errors = [];
+  let hasErrors = false;
   const reqBody = req.body;
 
   let EMPLOYER_NAME = reqBody.EMPLOYER_NAME;
@@ -25,22 +26,39 @@
   let error = checkArgumentProvided(EMPLOYER_NAME, EMPLOYER_START_DATE, EMPLOYER_END_DATE, EMPLOYER_STATE, AGENT_REPRESENTING_EMPLOYER
     , SOC_CODE, NAICS_CODE, FULL_TIME_POSITION, H1B_DEPENDENT, WORKSITE_STATE);
   if(error !== undefined){
-      throw error;
+      errors.push(error);
   }
 
   let error1 = checkArgumentIsString(EMPLOYER_NAME, SOC_CODE, NAICS_CODE);
   if(error1 !== undefined){
-      throw error1;
+    errors.push(error1);
   }
 
    let error2 = checkArgumentIsNullOrEmpty(EMPLOYER_NAME, SOC_CODE, NAICS_CODE);
    if(error2 !== undefined){
-       throw error2;
+    errors.push(error2);
    } 
+
+   if (errors.length > 0) {
+    res.status(400).render('handlebar/start', { errors : errors , hasErrors : true});
+    return;
+  }
+
+  let EMPL_START_DATE = new Date(EMPLOYER_START_DATE);
+  let dd = String(EMPL_START_DATE.getDate()).padStart(2, '0');
+  let mm = String(EMPL_START_DATE.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = EMPL_START_DATE.getFullYear();
+  EMPL_START_DATE = mm + '/' + dd + '/' + yyyy;
+
+  let EMPL_END_DATE = new Date(EMPLOYER_END_DATE);
+  let dd1 = String(EMPL_END_DATE.getDate()).padStart(2, '0');
+  let mm1 = String(EMPL_END_DATE.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy1 = EMPL_END_DATE.getFullYear();
+  EMPL_END_DATE = mm1 + '/' + dd1 + '/' + yyyy1;
 
   try{
     const data = {
-      array: [EMPLOYER_NAME,EMPLOYER_START_DATE,EMPLOYER_END_DATE,EMPLOYER_STATE,AGENT_REPRESENTING_EMPLOYER,SOC_CODE,NAICS_CODE,
+      array: [EMPLOYER_NAME,EMPL_START_DATE,EMPL_END_DATE,EMPLOYER_STATE,AGENT_REPRESENTING_EMPLOYER,SOC_CODE,NAICS_CODE,
         FULL_TIME_POSITION,H1B_DEPENDENT,WORKSITE_STATE]
     }
       

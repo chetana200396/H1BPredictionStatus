@@ -4,17 +4,19 @@
 <form method="POST" action="/visaApproval">
 <ul>
     <label>Employer Name : 
-        <input type="text" name="EMPLOYER_NAME" placeholder="Employer Name">
+        <input type="text" name="EMPLOYER_NAME" placeholder="Employer Name" required>
     </label><br><br>
+
     <label>Employer Start Date : 
-        <input type="date" name="EMPLOYER_START_DATE" placeholder="Employer Start Date">
+        <input type="date" name="EMPLOYER_START_DATE" placeholder="Employer Start Date" required>
     </label><br><br>
+
     <label>Employer End Date : 
-        <input type="date" name="EMPLOYER_END_DATE" placeholder="Employer End Date">
+        <input type="date" name="EMPLOYER_END_DATE" placeholder="Employer End Date" required>
     </label><br><br>
     
     <label for="EMPLOYER_STATE">Employer State : </label>
-    <select name="EMPLOYER_STATE" id="EMPLOYER_STATE">
+    <select name="EMPLOYER_STATE" id="EMPLOYER_STATE" required>
     <option value="AL">AL</option>
     <option value="AK">AK</option>
     <option value="AZ">AZ</option>
@@ -73,16 +75,17 @@
     </select> <br><br>
 
     <p>Agent Representing Employer :</p>
-    <input type="radio" id="yes" name="AGENT_REPRESENTING_EMPLOYER" value="Y">
+    <input type="radio" id="yes" name="AGENT_REPRESENTING_EMPLOYER" value="Y" >
     <label for="yes">YES</label>
     <input type="radio" id="no" name="AGENT_REPRESENTING_EMPLOYER" value="N">
     <label for="no">NO</label><br><br>
 
      <label>SOC Code :
-        <input type="text" name="SOC_CODE" placeholder="SOC Code">
+        <input type="text" name="SOC_CODE" placeholder="SOC Code" required>
     </label><br><br>
+    
      <label>Nacis Code
-        <input type="text" name="NAICS_CODE" placeholder="Nacis Code">
+        <input type="text" name="NAICS_CODE" placeholder="Nacis Code" required>
     </label><br><br>
 
     <p>Full Time Position :</p>
@@ -98,7 +101,7 @@
     <label for="no">NO</label><br><br>
     
     <label for="WORKSITE_STATE">Worksite State : </label>
-    <select name="WORKSITE_STATE" id="WORKSITE_STATE">
+    <select name="WORKSITE_STATE" id="WORKSITE_STATE" required>
     <option value="AL">AL</option>
     <option value="AK">AK</option>
     <option value="AZ">AZ</option>
