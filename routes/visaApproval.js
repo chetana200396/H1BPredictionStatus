@@ -23,6 +23,20 @@
   let H1B_DEPENDENT = reqBody.H1B_DEPENDENT;
   let WORKSITE_STATE = reqBody.WORKSITE_STATE;
 
+  const form = {
+    EMPLOYER_NAME: EMPLOYER_NAME,
+    EMPLOYER_START_DATE: EMPLOYER_START_DATE,
+    EMPLOYER_END_DATE: EMPLOYER_END_DATE,
+    EMPLOYER_STATE: EMPLOYER_STATE,
+    AGENT_REPRESENTING_EMPLOYER: AGENT_REPRESENTING_EMPLOYER,
+    SOC_CODE: SOC_CODE,
+    NAICS_CODE: NAICS_CODE,
+    FULL_TIME_POSITION: FULL_TIME_POSITION,
+    H1B_DEPENDENT: H1B_DEPENDENT,
+    WORKSITE_STATE: WORKSITE_STATE
+}
+
+
   let error = checkArgumentProvided(EMPLOYER_NAME, EMPLOYER_START_DATE, EMPLOYER_END_DATE, EMPLOYER_STATE, AGENT_REPRESENTING_EMPLOYER
     , SOC_CODE, NAICS_CODE, FULL_TIME_POSITION, H1B_DEPENDENT, WORKSITE_STATE);
   if(error !== undefined){
@@ -40,25 +54,25 @@
    } 
 
    if (errors.length > 0) {
-    res.status(400).render('handlebar/start', { errors : errors , hasErrors : true});
+    res.status(400).render('handlebar/start', { errors : errors , hasErrors : true , form : form});
     return;
   }
 
-  let EMPL_START_DATE = new Date(EMPLOYER_START_DATE);
-  let dd = String(EMPL_START_DATE.getDate()).padStart(2, '0');
-  let mm = String(EMPL_START_DATE.getMonth() + 1).padStart(2, '0'); //January is 0!
-  let yyyy = EMPL_START_DATE.getFullYear();
-  EMPL_START_DATE = mm + '/' + dd + '/' + yyyy;
+  // let EMPL_START_DATE = new Date(EMPLOYER_START_DATE);
+  // let dd = String(EMPL_START_DATE.getDate()).padStart(2, '0');
+  // let mm = String(EMPL_START_DATE.getMonth() + 1).padStart(2, '0');
+  // let yyyy = EMPL_START_DATE.getFullYear();
+  // EMPL_START_DATE = mm + '/' + dd + '/' + yyyy;
 
-  let EMPL_END_DATE = new Date(EMPLOYER_END_DATE);
-  let dd1 = String(EMPL_END_DATE.getDate()).padStart(2, '0');
-  let mm1 = String(EMPL_END_DATE.getMonth() + 1).padStart(2, '0'); //January is 0!
-  let yyyy1 = EMPL_END_DATE.getFullYear();
-  EMPL_END_DATE = mm1 + '/' + dd1 + '/' + yyyy1;
+  // let EMPL_END_DATE = new Date(EMPLOYER_END_DATE);
+  // let dd1 = String(EMPL_END_DATE.getDate()).padStart(2, '0');
+  // let mm1 = String(EMPL_END_DATE.getMonth() + 1).padStart(2, '0');
+  // let yyyy1 = EMPL_END_DATE.getFullYear();
+  // EMPL_END_DATE = mm1 + '/' + dd1 + '/' + yyyy1;
 
   try{
     const data = {
-      array: [EMPLOYER_NAME,EMPL_START_DATE,EMPL_END_DATE,EMPLOYER_STATE,AGENT_REPRESENTING_EMPLOYER,SOC_CODE,NAICS_CODE,
+      array: [EMPLOYER_NAME,EMPLOYER_START_DATE,EMPLOYER_END_DATE,EMPLOYER_STATE,AGENT_REPRESENTING_EMPLOYER,SOC_CODE,NAICS_CODE,
         FULL_TIME_POSITION,H1B_DEPENDENT,WORKSITE_STATE]
     }
       
@@ -76,13 +90,12 @@
     py.stdout.on('end', function () {
       let resultData = JSON.parse(resultString);      
       let sum = resultData['sum'];
-      res.render('handlebar/start', { sum : sum , isSum : true});
+      res.render('handlebar/start', { sum : sum , isSum : true, form : form});
       return;
     });
-
     } catch (e) {
       res.status(404);
-      res.render('handlebar/start', { errors : e.message , hasErrors : true});
+      res.render('handlebar/start', { errors : e.message , hasErrors : true, form : form});
     }
   });
 
